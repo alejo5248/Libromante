@@ -57,6 +57,14 @@ public class LibroServiceImpl implements LibroService{
 		}
 	}
 
+	@Override
+	public List<Libro> findAllLibros() {
+		
+		return libroRep.findAllLibros();
+	}
+
+	
+
 
 
 	

@@ -30,4 +30,8 @@ public class LibroController {
 	}
 	
 
+	@GetMapping("/queleer")
+	public List<Libro> queLeer(){
+		return libroServ.findAllLibros();
+	}
 }

@@ -17,5 +17,6 @@ public interface LibroRepository extends JpaRepository<Libro, Serializable>{
 	//la misma manera de hacer consultas
 	public List<Libro> findByNombreContainingIgnoreCase(String nombre); 
 	
-	
+	@Query(value= "SELECT * FROM Libro ORDER BY RAND() LIMIT 1", nativeQuery = true)
+	public List<Libro> findAllLibros();
 }
