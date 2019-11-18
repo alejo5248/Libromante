@@ -13,8 +13,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import util.PaymentMode;
-import util.PaymentStatus;
+import com.libromante.util.PaymentMode;
+import com.libromante.util.PaymentStatus;
 
 @Entity
 @Table(name="Payment")

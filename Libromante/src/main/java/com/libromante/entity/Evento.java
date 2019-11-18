@@ -31,8 +31,8 @@ public class Evento implements Serializable{
 	@Column(name="id_evento", unique=true, nullable=false)
 	private int id;
 	
-	@Column(name="nombre", nullable=false, length=40)
-	private String nombre;
+	@Column(name="title", nullable=false, length=40)
+	private String title;
 	
 	@Column(name="descripcion", nullable=false, length=300)
 	private String descripcion;
@@ -41,9 +41,9 @@ public class Evento implements Serializable{
 	private String lugar;
 	
 	
-	@Column(name="fecha", nullable=true)
+	@Column(name="date", nullable=true)
 	@Temporal(TemporalType.DATE)
-	private Date fecha;
+	private Date date;
 	
 	@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 	@OneToMany(fetch = FetchType.LAZY, cascade =CascadeType.ALL )
@@ -71,12 +71,12 @@ public class Evento implements Serializable{
 		this.id = id;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getDescripcion() {
@@ -95,12 +95,12 @@ public class Evento implements Serializable{
 		this.lugar = lugar;
 	}
 
-	public Date getFecha() {
-		return fecha;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 

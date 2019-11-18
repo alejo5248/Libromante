@@ -77,11 +77,12 @@ public class AdminController {
 		Evento update = this.eventoServ.findEventoById(id);
 		if(id!=0) {
 			LOG.info("accediendo al id");
-			 update.setNombre(evento.getNombre());
+			 update.setTitle(evento.getTitle());
 			 update.setDescripcion(evento.getDescripcion());
 			 update.setLugar(evento.getLugar());
-			 update.setFecha(evento.getFecha());
+			 update.setDate(evento.getDate());
 			 update.setEstado(evento.isEstado());
+			 update.setInscripcion(evento.isInscripcion());
 			 this.eventoServ.updateEvento(update);
 			
 		}

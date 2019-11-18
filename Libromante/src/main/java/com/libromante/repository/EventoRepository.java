@@ -15,10 +15,10 @@ import com.libromante.entity.Evento;
 @Repository("eventorepository")
 public interface EventoRepository extends JpaRepository<Evento, Serializable>, PagingAndSortingRepository<Evento, Serializable> {
 
-	public abstract Evento findByNombre(String nombre);
-	public abstract List<Evento> findByFecha(Date fecha);
+	public abstract Evento findByTitle(String title);
+	public abstract List<Evento> findByDate(Date date);
 	public abstract Evento findById(int id);
-	public abstract Evento findByNombreAndId(String nombre, int id);
+	public abstract Evento findByTitleAndId(String title, int id);
 	public abstract Page<Evento> findAll(Pageable pageable);
 	
 	

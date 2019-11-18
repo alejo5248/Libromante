@@ -34,7 +34,7 @@ public class EventoController {
 	@Qualifier("inscripcionserviceImpl")
 	private InscripcionService inscripcionServ;
 	
-	@GetMapping("/mostrareventos")
+	@GetMapping("/mostrar")
 	public List<Evento> listarEventos(){
 		return eventoServ.listAllEventos();
 	}

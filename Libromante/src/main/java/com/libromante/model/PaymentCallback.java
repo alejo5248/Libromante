@@ -1,6 +1,6 @@
 package com.libromante.model;
 
-import util.PaymentMode;
+import com.libromante.util.PaymentMode;
 
 public class PaymentCallback {
 	private String txnid;

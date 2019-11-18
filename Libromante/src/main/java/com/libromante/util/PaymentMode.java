@@ -1,4 +1,4 @@
-package util;
+package com.libromante.util;
 
 public enum PaymentMode {
 
