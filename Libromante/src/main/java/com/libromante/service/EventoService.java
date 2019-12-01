@@ -15,6 +15,7 @@ public interface EventoService {
 	public abstract boolean addEvento(Evento evento);
 	public abstract boolean updateEvento(Evento evento);
 	public abstract List<Evento> listPorPaginacion(Pageable pageable);
-	
+	public abstract List<Evento> listarPorId(int id);
+	public List<Evento> findByTitle(String title);
 	
 }

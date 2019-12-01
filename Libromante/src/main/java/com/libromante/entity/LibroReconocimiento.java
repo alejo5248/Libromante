@@ -28,16 +28,29 @@ public class LibroReconocimiento implements Serializable{
 	@JsonIgnoreProperties( {"hibernateLazyInitializer", "handler"})
 	@JoinColumn(name= "reconocimiento_id", nullable= false)
 	private Reconocimiento reconocimiento;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnoreProperties( {"hibernateLazyInitializer", "handler"})
+	@JoinColumn(name= "libro_id", nullable= false)
+	private Libro libro;
 
 	public LibroReconocimiento() {
 		super();
 	}
 
-	public LibroReconocimiento(int id, Reconocimiento reconocimiento) {
-		super();
-		this.id = id;
-		this.reconocimiento = reconocimiento;
+	
+
+	public Libro getLibro() {
+		return libro;
 	}
+
+
+
+	public void setLibro(Libro libro) {
+		this.libro = libro;
+	}
+
+
 
 	public int getId() {
 		return id;

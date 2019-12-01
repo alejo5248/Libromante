@@ -29,6 +29,11 @@ public class LibroGenero implements Serializable{
 	@JoinColumn(name= "genero_id", nullable= false)
 	private Genero genero;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnoreProperties( {"hibernateLazyInitializer", "handler"})
+	@JoinColumn(name= "libro_id", nullable= false)
+	private Libro libro;
+	
 	
 	
 	public LibroGenero() {
@@ -36,13 +41,33 @@ public class LibroGenero implements Serializable{
 	}
 	
 
-	public LibroGenero(int id, Genero genero) {
-		super();
-		this.id = id;
-		this.genero = genero;
-	}
+	
 
 	
+	
+
+
+
+	public Libro getLibro() {
+		return libro;
+	}
+
+
+
+
+
+
+
+
+
+	public void setLibro(Libro libro) {
+		this.libro = libro;
+	}
+
+
+
+
+
 
 
 

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.libromante.entity.Payment;
 
-@Repository
+@Repository("paymentrepository")
 public interface PaymentRepository extends CrudRepository<Payment, Serializable>{
 	
 	Payment findByTxnId(String txnId);

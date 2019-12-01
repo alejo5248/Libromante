@@ -86,6 +86,18 @@ public class EventoServiceImpl implements EventoService{
 		return eventoRep.findAll(pageable).getContent();
 	}
 
+	@Override
+	public List<Evento> listarPorId(int id) {
+		
+		return eventoRep.findAllId(id);
+	}
+
+	@Override
+	public List<Evento> findByTitle(String title) {
+		
+		return eventoRep.findByTitleContainingIgnoreCase(title);
+	}
+
 	
 
 	

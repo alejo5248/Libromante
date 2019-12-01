@@ -7,10 +7,12 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import com.libromante.entity.Evento;
+
 
 @Repository("eventorepository")
 public interface EventoRepository extends JpaRepository<Evento, Serializable>, PagingAndSortingRepository<Evento, Serializable> {
@@ -20,6 +22,11 @@ public interface EventoRepository extends JpaRepository<Evento, Serializable>, P
 	public abstract Evento findById(int id);
 	public abstract Evento findByTitleAndId(String title, int id);
 	public abstract Page<Evento> findAll(Pageable pageable);
+	
+	@Query( value = "select * from evento where id_evento =?1 ", nativeQuery = true)
+	public List<Evento> findAllId(int id);
+	
+	public List<Evento> findByTitleContainingIgnoreCase(String title);
 	
 	
 	

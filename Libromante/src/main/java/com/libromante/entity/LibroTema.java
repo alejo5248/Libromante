@@ -28,17 +28,29 @@ public class LibroTema implements Serializable{
 	@JsonIgnoreProperties( {"hibernateLazyInitializer", "handler"})
 	@JoinColumn(name= "tema_id", nullable= false)
 	private Tema temas;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnoreProperties( {"hibernateLazyInitializer", "handler"})
+	@JoinColumn(name= "libro_id", nullable= false)
+	private Libro libro;
 
 	public LibroTema() {
 		super();
 	}
 
-	public LibroTema(int id,  Tema temas) {
-		super();
-		this.id = id;
-		
-		this.temas = temas;
+	
+
+	public Libro getLibro() {
+		return libro;
 	}
+
+
+
+	public void setLibro(Libro libro) {
+		this.libro = libro;
+	}
+
+
 
 	public int getId() {
 		return id;
