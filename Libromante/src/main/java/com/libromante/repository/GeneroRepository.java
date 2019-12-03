@@ -10,7 +10,8 @@ import com.libromante.entity.Genero;
 
 @Repository("generorepository")
 public interface GeneroRepository extends JpaRepository<Genero, Serializable>{
-	public abstract Genero finById(int id);
+	
+	public abstract Genero findById(int id);
 	
 	public List<Genero> findAll();
 

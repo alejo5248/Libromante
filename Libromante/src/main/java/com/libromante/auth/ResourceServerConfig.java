@@ -24,6 +24,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/admin/**").permitAll()//que direcciones se puede ingrear sin autenticar
 		.antMatchers(HttpMethod.GET, "/eventos/**","/libros/queleer","/libros/listarpornombre/**","/libros/listarporgenero/**","/libros/betseller", "/admin/**").permitAll()
 		.antMatchers(HttpMethod.PUT, "/admin/**" ).permitAll()
+		.antMatchers(HttpMethod.DELETE, "/admin/**").permitAll()
 		/*.antMatchers(HttpMethod.GET,"/factura/mostrarfacturas/{id}").hasRole("ADMIN")*/
 		.anyRequest().authenticated()
 		.and().cors().configurationSource(corsConfigurationSource());

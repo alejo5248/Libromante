@@ -74,15 +74,46 @@ public class AdminController {
 	@Autowired
 	@Qualifier("libroserviceimpl")
 	private LibroService libroServ;
-	private AutorService autorServ;
-	private ColeccionService coleccionServ;
-	private EditorialService editorialServ;
+	
+	
+	@Autowired
+	@Qualifier("generoserviceimpl")
 	private GeneroService generoServ;
+	
+	@Autowired
+	@Qualifier("autorserviceimpl")
+	private AutorService autorServ;
+	
+	@Autowired
+	@Qualifier("coleccionserviceimpl")
+	private ColeccionService coleccionServ;
+	
+	@Autowired
+	@Qualifier("editorialserviceimpl")
+	private EditorialService editorialServ;
+	
+	@Autowired
+	@Qualifier("librogeneroserviceimpl")
 	private LibroGeneroService libroGeneroServ;
+	
+	@Autowired
+	@Qualifier("libroreconocimientoserviceimpl")
 	private LibroReconocimientoService libroReconocimientoServ;
+	
+	@Autowired
+	@Qualifier("librotemaserviceimpl")
 	private LibroTemaService libroTemaServ;
+	
+	@Autowired
+	@Qualifier("paisserviceimpl")
 	private PaisService paisServ;
+	
+	@Autowired
+	@Qualifier("reconocimientoserviceimpl")
 	private ReconocimientoService reconocimientoServ;
+	
+	@Autowired
+	@Qualifier("temaserviceimpl")
 	private TemaService temaServ;
 	
 	
@@ -156,7 +187,7 @@ public class AdminController {
 		return usuarioServ.listAllUsuarios();
 	}
 	
-	//----------------------------aquie empiezan las funciones de libros--------------------------------------
+	//----------------------------aqui empiezan las funciones de libros--------------------------------------
 	@PostMapping("/libro")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public boolean añadirLibro(@RequestBody @Valid  Libro libro) {
@@ -260,6 +291,16 @@ public class AdminController {
 	@GetMapping("/generos")
 	public List<Genero> listarGenero(){
 		return generoServ.findAllGeneros();
+	}
+	
+	@PutMapping("genero/modificar/{id}")
+	public Genero updateGenero(@PathVariable("id") int id, @RequestBody @Valid Genero genero) {
+		Genero update = generoServ.findByIdGenero(id);
+		if(id != 0) {
+			update.setNombre(genero.getNombre());
+			this.generoServ.addGenero(update);
+		}
+		return update;
 	}
 	
 	@PostMapping("/librogenero")
