@@ -242,6 +242,27 @@ public class AdminController {
 		return libroServ.removeLibro(id);
 	}
 	
+	@PutMapping("libro/modificar/{id}")
+	public Libro updateLibro(@PathVariable("id") int id, @RequestBody @Valid Libro libro) {
+		Libro update = libroServ.findById(id);
+		if(id != 0) {
+			update.setAutor(libro.getAutor());
+			update.setBestseller(libro.isBestseller());
+			update.setColeccion(libro.getColeccion());
+			update.setEdicion(libro.getEdicion());
+			update.setEditorial(libro.getEditorial());
+			update.setFechaPublicacion(libro.getFechaPublicacion());
+			update.setFormato(libro.getFormato());
+			update.setIdioma(libro.getIdioma());
+			update.setNombre(libro.getNombre());
+			update.setPaginas(libro.getPaginas());
+			update.setPrecio(libro.getPrecio());
+			update.setSipnosis(libro.getSipnosis());
+			this.libroServ.addLibro(update);
+		}
+		return update;
+	}
+	
 	@PostMapping("/coleccion")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public boolean añadirColeccion(@RequestBody @Valid  Coleccion coleccion) {
@@ -252,6 +273,16 @@ public class AdminController {
 	@DeleteMapping("/coleccion/{id}")
 	public boolean borrarColeccion(@PathVariable("id") int id) {
 		return coleccionServ.removeColeccion(id);
+	}
+	
+	@PutMapping("coleccion/modificar/{id}")
+	public Coleccion updateColeccion(@PathVariable("id") int id, @RequestBody @Valid Coleccion coleccion) {
+		Coleccion update = coleccionServ.findByIdColeccion(id);
+		if(id != 0) {
+			update.setNombre(coleccion.getNombre());
+			this.coleccionServ.addColeccion(update);
+		}
+		return update;
 	}
 	
 	@GetMapping("/colecciones")
@@ -269,6 +300,16 @@ public class AdminController {
 	@DeleteMapping("/editorial/{id}")
 	public boolean borrarEditorial(@PathVariable("id") int id) {
 		return editorialServ.removeEditorial(id);
+	}
+	
+	@PutMapping("editorial/modificar/{id}")
+	public Editorial updateEditorial(@PathVariable("id") int id, @RequestBody @Valid Editorial editorial) {
+		Editorial update = editorialServ.findByIdEditorial(id);
+		if(id != 0) {
+			update.setNombre(editorial.getNombre());
+			this.editorialServ.addEditorial(update);
+		}
+		return update;
 	}
 	
 	@GetMapping("/editoriales")
@@ -308,7 +349,18 @@ public class AdminController {
 	public boolean añadirLibroGenero(@RequestBody @Valid  LibroGenero libroGenero) {
 	
 		return libroGeneroServ.addLibroGenero(libroGenero);	
-	}	
+	}
+	
+	@PutMapping("librogenero/modificar/{id}")
+	public LibroGenero updateLibroGenero(@PathVariable("id") int id, @RequestBody @Valid LibroGenero libroGenero) {
+		LibroGenero update = libroGeneroServ.findByIdLibroGenero(id);
+		if(id != 0) {
+			update.setLibro(libroGenero.getLibro());
+			update.setGenero(libroGenero.getGenero());
+			this.libroGeneroServ.addLibroGenero(update);
+		}
+		return update;
+	}
 	
 	@DeleteMapping("/librogenero/{id}")
 	public boolean borrarLibroGenero(@PathVariable("id") int id) {
@@ -323,6 +375,17 @@ public class AdminController {
 		return libroReconocimientoServ.addLibroReconocimiento(libroReconocimiento);	
 	}	
 	
+	@PutMapping("libroreconocimiento/modificar/{id}")
+	public LibroReconocimiento updateLibroReconocimiento(@PathVariable("id") int id, @RequestBody @Valid LibroReconocimiento libroReconocimiento) {
+		LibroReconocimiento update = libroReconocimientoServ.findByIdLibroReconocimiento(id);
+		if(id != 0) {
+			update.setLibro(libroReconocimiento.getLibro());
+			update.setReconocimiento(libroReconocimiento.getReconocimiento());
+			this.libroReconocimientoServ.addLibroReconocimiento(update);
+		}
+		return update;
+	}
+	
 	@DeleteMapping("/libroreconocimiento/{id}")
 	public boolean borrarLibroReconocimiento(@PathVariable("id") int id) {
 		return libroReconocimientoServ.deleteLibroReconocimiento(id);
@@ -334,6 +397,17 @@ public class AdminController {
 	
 		return libroTemaServ.addLibroTema(libroTema);	
 	}	
+	
+	@PutMapping("librotema/modificar/{id}")
+	public LibroTema updateLibroTema(@PathVariable("id") int id, @RequestBody @Valid LibroTema libroTema) {
+		LibroTema update = libroTemaServ.findByIdLibroTema(id);
+		if(id != 0) {
+			update.setLibro(libroTema.getLibro());
+			update.setTemas(libroTema.getTemas());
+			this.libroTemaServ.addLibroTema(update);
+		}
+		return update;
+	}
 	
 	@DeleteMapping("/librotema/{id}")
 	public boolean borrarLibroTema(@PathVariable("id") int id) {
@@ -352,6 +426,17 @@ public class AdminController {
 		return paisServ.removePais(id);
 	}
 	
+	@PutMapping("pais/modificar/{id}")
+	public Pais updatePais(@PathVariable("id") int id, @RequestBody @Valid Pais pais) {
+		Pais update = paisServ.findByIdPais(id);
+		if(id != 0) {
+			update.setNombre(pais.getNombre());
+			update.setSiglas(pais.getSiglas());
+			this.paisServ.addPais(update);
+		}
+		return update;
+	}
+	
 	@GetMapping("/paises")
 	public List<Pais> listarPaises(){
 		return paisServ.findAllPaises();
@@ -366,6 +451,16 @@ public class AdminController {
 	@DeleteMapping("/reconocimiento/{id}")
 	public boolean borrarReconocimiento(@PathVariable("id") int id) {
 		return reconocimientoServ.removeReconocimiento(id);
+	}
+	
+	@PutMapping("reconocimiento/modificar/{id}")
+	public Reconocimiento updateReconocimiento(@PathVariable("id") int id, @RequestBody @Valid Reconocimiento reconocimiento) {
+		Reconocimiento update = reconocimientoServ.findByIdReconocimiento(id);
+		if(id != 0) {
+			update.setNombre(reconocimiento.getNombre());
+			this.reconocimientoServ.addReconocimiento(update);
+		}
+		return update;
 	}
 	
 	@GetMapping("/reconocimiento")
@@ -385,6 +480,16 @@ public class AdminController {
 		return temaServ.removeTema(id);
 	}
 	
+	@PutMapping("tema/modificar/{id}")
+	public Tema updateTema(@PathVariable("id") int id, @RequestBody @Valid Tema tema) {
+		Tema update = temaServ.findByIdTema(id);
+		if(id != 0) {
+			update.setNombre(tema.getNombre());
+			this.temaServ.addTema(update);
+		}
+		return update;
+	}
+	
 	@GetMapping("/temas")
 	public List<Tema> listarTemas(){
 		return temaServ.findAllTemas();
@@ -400,6 +505,18 @@ public class AdminController {
 	@DeleteMapping("/autor/{id}")
 	public boolean borrarAutor(@PathVariable("id") int id) {
 		return autorServ.removeAutor(id);
+	}
+	
+	@PutMapping("autor/modificar/{id}")
+	public Autor updateAutor(@PathVariable("id") int id, @RequestBody @Valid Autor autor) {
+		Autor update = autorServ.findByIdAutor(id);
+		if(id != 0) {
+			update.setNombre(autor.getNombre());
+			update.setBiografia(autor.getBiografia());
+			update.setPais(autor.getPais());
+			this.autorServ.addAutor(update);
+		}
+		return update;
 	}
 	
 	@GetMapping("/autores")
