@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.libromante.entity.Libro;
-import com.libromante.entity.LibroGenero;
 import com.libromante.repository.LibroRepository;
 import com.libromante.service.LibroService;
 
@@ -66,12 +65,7 @@ public class LibroServiceImpl implements LibroService {
 		return libroRep.findAllLibros();
 	}
 
-	@Override
-	@Transactional(readOnly = true)
-	public List<LibroGenero> findByGenero(int id) {
 
-		return libroRep.findByGenero(id);
-	}
 
 	@Override
 	@Transactional(readOnly = true)
@@ -91,6 +85,18 @@ public class LibroServiceImpl implements LibroService {
 	public Page<Libro> listPorPaginacion(Pageable pageable) {
 
 		return libroRep.findAll(pageable);
+	}
+
+	@Override
+	public List<Libro> findAll() {
+		
+		return libroRep.findAll();
+	}
+
+	@Override
+	public List<Libro> findAllById(int id) {
+		
+		return libroRep.findAllId(id);
 	}
 
 }

@@ -22,7 +22,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/admin/**").permitAll()//que direcciones se puede ingrear sin autenticar
-		.antMatchers(HttpMethod.GET, "/eventos/**","/libros/queleer","/libros/listarpornombre/**","/libros/listarporgenero/**","/libros/betseller", "/admin/**").permitAll()
+		.antMatchers(HttpMethod.GET,"/libros/**", "/admin/**").permitAll()
 		.antMatchers(HttpMethod.PUT, "/admin/**" ).permitAll()
 		.antMatchers(HttpMethod.DELETE, "/admin/**").permitAll()
 		/*.antMatchers(HttpMethod.GET,"/factura/mostrarfacturas/{id}").hasRole("ADMIN")*/

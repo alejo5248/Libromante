@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.libromante.entity.Libro;
-import com.libromante.entity.LibroGenero;
 import com.libromante.service.LibroService;
 
 @RestController
@@ -43,18 +42,20 @@ public class LibroController {
 		return libroServ.findAllPortadas();
 	}
 	
-	@GetMapping("/betseller")
-	public List<Libro> filtrarPorBetseller(){
-		return libroServ.findAllBetseller();
-	}
-	@GetMapping("/listarporgenero/{id}")
-	@ResponseStatus(code = HttpStatus.OK)
-	public List<LibroGenero> filtrarPorGenero(@PathVariable int id){
-		return libroServ.findByGenero(id);
-	}
+
 	
 	@GetMapping("/page/{page}")
 	public Page<Libro> listarPorPagina(@PathVariable Integer page){
 		return libroServ.listPorPaginacion(PageRequest.of(page, 20));
+	}
+	
+	@GetMapping("/verlibros")
+	public List<Libro> verLibros(){
+		return libroServ.findAll();
+	}
+	
+	@GetMapping("/{id}")
+	public List<Libro> findById(@PathVariable int id){
+		return libroServ.findAllById(id);
 	}
 }

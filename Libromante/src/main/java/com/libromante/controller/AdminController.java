@@ -37,9 +37,6 @@ import com.libromante.entity.Editorial;
 import com.libromante.entity.Evento;
 import com.libromante.entity.Genero;
 import com.libromante.entity.Libro;
-import com.libromante.entity.LibroGenero;
-import com.libromante.entity.LibroReconocimiento;
-import com.libromante.entity.LibroTema;
 import com.libromante.entity.Pais;
 import com.libromante.entity.Reconocimiento;
 import com.libromante.entity.Tema;
@@ -49,10 +46,7 @@ import com.libromante.service.ColeccionService;
 import com.libromante.service.EditorialService;
 import com.libromante.service.EventoService;
 import com.libromante.service.GeneroService;
-import com.libromante.service.LibroGeneroService;
-import com.libromante.service.LibroReconocimientoService;
 import com.libromante.service.LibroService;
-import com.libromante.service.LibroTemaService;
 import com.libromante.service.PaisService;
 import com.libromante.service.ReconocimientoService;
 import com.libromante.service.TemaService;
@@ -92,17 +86,6 @@ public class AdminController {
 	@Qualifier("editorialserviceimpl")
 	private EditorialService editorialServ;
 	
-	@Autowired
-	@Qualifier("librogeneroserviceimpl")
-	private LibroGeneroService libroGeneroServ;
-	
-	@Autowired
-	@Qualifier("libroreconocimientoserviceimpl")
-	private LibroReconocimientoService libroReconocimientoServ;
-	
-	@Autowired
-	@Qualifier("librotemaserviceimpl")
-	private LibroTemaService libroTemaServ;
 	
 	@Autowired
 	@Qualifier("paisserviceimpl")
@@ -247,7 +230,6 @@ public class AdminController {
 		Libro update = libroServ.findById(id);
 		if(id != 0) {
 			update.setAutor(libro.getAutor());
-			update.setBestseller(libro.isBestseller());
 			update.setColeccion(libro.getColeccion());
 			update.setEdicion(libro.getEdicion());
 			update.setEditorial(libro.getEditorial());
@@ -344,75 +326,7 @@ public class AdminController {
 		return update;
 	}
 	
-	@PostMapping("/librogenero")
-	@ResponseStatus(code = HttpStatus.CREATED)
-	public boolean añadirLibroGenero(@RequestBody @Valid  LibroGenero libroGenero) {
-	
-		return libroGeneroServ.addLibroGenero(libroGenero);	
-	}
-	
-	@PutMapping("librogenero/modificar/{id}")
-	public LibroGenero updateLibroGenero(@PathVariable("id") int id, @RequestBody @Valid LibroGenero libroGenero) {
-		LibroGenero update = libroGeneroServ.findByIdLibroGenero(id);
-		if(id != 0) {
-			update.setLibro(libroGenero.getLibro());
-			update.setGenero(libroGenero.getGenero());
-			this.libroGeneroServ.addLibroGenero(update);
-		}
-		return update;
-	}
-	
-	@DeleteMapping("/librogenero/{id}")
-	public boolean borrarLibroGenero(@PathVariable("id") int id) {
-		return libroGeneroServ.removeLibroGenero(id);
-	}
-	
-	
-	@PostMapping("/libroreconocimiento")
-	@ResponseStatus(code = HttpStatus.CREATED)
-	public boolean añadirLibroReconocimiento(@RequestBody @Valid LibroReconocimiento libroReconocimiento) {
-	
-		return libroReconocimientoServ.addLibroReconocimiento(libroReconocimiento);	
-	}	
-	
-	@PutMapping("libroreconocimiento/modificar/{id}")
-	public LibroReconocimiento updateLibroReconocimiento(@PathVariable("id") int id, @RequestBody @Valid LibroReconocimiento libroReconocimiento) {
-		LibroReconocimiento update = libroReconocimientoServ.findByIdLibroReconocimiento(id);
-		if(id != 0) {
-			update.setLibro(libroReconocimiento.getLibro());
-			update.setReconocimiento(libroReconocimiento.getReconocimiento());
-			this.libroReconocimientoServ.addLibroReconocimiento(update);
-		}
-		return update;
-	}
-	
-	@DeleteMapping("/libroreconocimiento/{id}")
-	public boolean borrarLibroReconocimiento(@PathVariable("id") int id) {
-		return libroReconocimientoServ.deleteLibroReconocimiento(id);
-	}
-	
-	@PostMapping("/librotema")
-	@ResponseStatus(code = HttpStatus.CREATED)
-	public boolean añadirLibroTema(@RequestBody @Valid  LibroTema libroTema) {
-	
-		return libroTemaServ.addLibroTema(libroTema);	
-	}	
-	
-	@PutMapping("librotema/modificar/{id}")
-	public LibroTema updateLibroTema(@PathVariable("id") int id, @RequestBody @Valid LibroTema libroTema) {
-		LibroTema update = libroTemaServ.findByIdLibroTema(id);
-		if(id != 0) {
-			update.setLibro(libroTema.getLibro());
-			update.setTemas(libroTema.getTemas());
-			this.libroTemaServ.addLibroTema(update);
-		}
-		return update;
-	}
-	
-	@DeleteMapping("/librotema/{id}")
-	public boolean borrarLibroTema(@PathVariable("id") int id) {
-		return libroTemaServ.deleteLibroTema(id);
-	}
+
 	
 	@PostMapping("/pais")
 	@ResponseStatus(code = HttpStatus.CREATED)

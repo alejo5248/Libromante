@@ -65,7 +65,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		
-		
+		//cambiarrrrr
 		clients.inMemory().withClient("angularapp")
 		.secret(passwordEncoder.encode("122345"))
 		.scopes("read","write")

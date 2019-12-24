@@ -57,7 +57,7 @@ public class Usuario implements Serializable{
 	
 	@Column(name="password")
 	@NotEmpty(message = "la contraseña no puede estar vacia")
-	@Size(min = 8, max=45)
+	@Size(min = 8, max=70)
 	private String password;
 	
 	@Column(name="enabled")

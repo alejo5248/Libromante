@@ -1,14 +1,19 @@
 package com.libromante.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="reconocimiento")
@@ -23,6 +28,7 @@ public class Reconocimiento implements Serializable{
 	@Column(name="nombre")
 	@NotEmpty(message = "ingrese un reconocimiento")
 	private String nombre;
+	
 	
 
 	public Reconocimiento() {
@@ -55,6 +61,10 @@ public class Reconocimiento implements Serializable{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+
+
+
 
 
 

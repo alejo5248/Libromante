@@ -11,7 +11,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import com.libromante.entity.Libro;
-import com.libromante.entity.LibroGenero;
+
 
 @Repository("librorepository")
 public interface LibroRepository
@@ -28,8 +28,6 @@ public interface LibroRepository
 	@Query(value = "SELECT * FROM Libro ORDER BY RAND() LIMIT 1", nativeQuery = true)
 	public List<Libro> findAllLibros();
 
-	@Query(value = "select * from Libro_genero where genero_id =?1 ", nativeQuery = true)
-	public List<LibroGenero> findByGenero(int id);
 
 	@Query(value = "SELECT * FROM Libro where bestseller = TRUE", nativeQuery = true)
 	public List<Libro> findAllBetseller();
@@ -38,5 +36,10 @@ public interface LibroRepository
 	public List<Libro> findAllPortadas();
 
 	public abstract Page<Libro> findAll(Pageable pageable);
+	
+	public List<Libro> findAll();
+	
+	@Query( value = "select * from libro where id_libro =?1 ", nativeQuery = true)
+	public List<Libro> findAllId(int id);
 
 }

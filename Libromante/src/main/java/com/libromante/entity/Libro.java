@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -37,7 +39,7 @@ public class Libro implements Serializable {
 
 	@Column(name = "precio")
 	@NotEmpty(message = "por favor ingrese el precio")
-	private int precio;
+	private Double precio;
 
 	@Column(name = "paginas")
 	@NotEmpty(message = "ingrese el numero de paginas")
@@ -66,9 +68,18 @@ public class Libro implements Serializable {
 	@Column(name = "foto")
 	private String foto;
 
-	@Column(name = "bestseller")
+	@Column(name = "isbn")
 	@NotEmpty(message = "no puede estar vacio")
-	private boolean bestseller;
+	private String isbn;
+	
+	@Column(name="promoción")
+	private boolean promocion;
+	
+	@Column(name="descuento_promocion")
+	private int descuento;
+	
+	@Column(name="precio_promoción")
+	private Double precioPromocion;
 
 	@NotNull(message = "el autor no puede ser nulo")
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -87,24 +98,22 @@ public class Libro implements Serializable {
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@JoinColumn(name = "coleccion_id")
 	private Coleccion coleccion;
+	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonIgnoreProperties({  "hibernateLazyInitializer", "handler" })
+	private List<Genero> genero;
+	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonIgnoreProperties({  "hibernateLazyInitializer", "handler" })
+	private List<Tema> tema;
+	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonIgnoreProperties({  "hibernateLazyInitializer", "handler" })
+	private List<Reconocimiento> reconocimiento;
 
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "libro")
-	private List<LibroGenero> generos;
-
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "libro")
-	private List<LibroTema> libroTema;
-
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "libro")
-	private List<LibroReconocimiento> libroReconocimiento;
-
+	
 	public Libro() {
-		generos = new ArrayList<LibroGenero>();
-		libroTema = new ArrayList<LibroTema>();
-		libroReconocimiento = new ArrayList<LibroReconocimiento>();
-	}
+		}
 
 	public String getFormato() {
 		return formato;
@@ -130,13 +139,35 @@ public class Libro implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public int getPrecio() {
+
+	public Double getPrecio() {
+		return precio * (getDescuento()/100);
+	}
+
+	public void setPrecio(Double precio) {
+		this.precio = precio;
+	}
+
+	public boolean isPromocion() {
+		return promocion;
+	}
+
+	public void setPromocion(boolean promocion) {
+		this.promocion = promocion;
+	}
+
+	public int getDescuento() {
+		return descuento;
+	}
+
+	public void setDescuento(int descuento) {
+		this.descuento = descuento;
+	}
+
+	public Double getPrecioPromocion() {
 		return precio;
 	}
 
-	public void setPrecio(int precio) {
-		this.precio = precio;
-	}
 
 	public int getPaginas() {
 		return paginas;
@@ -194,21 +225,16 @@ public class Libro implements Serializable {
 		this.autor = autor;
 	}
 
-	public boolean isBestseller() {
-		return bestseller;
+
+	public String getIsbn() {
+		return isbn;
 	}
 
-	public void setBestseller(boolean bestseller) {
-		this.bestseller = bestseller;
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
 	}
 
-	public List<LibroGenero> getGeneros() {
-		return generos;
-	}
-
-	public void setGeneros(List<LibroGenero> generos) {
-		this.generos = generos;
-	}
+	
 
 	public Editorial getEditorial() {
 		return editorial;
@@ -226,21 +252,31 @@ public class Libro implements Serializable {
 		this.coleccion = coleccion;
 	}
 
-	public List<LibroTema> getLibroTema() {
-		return libroTema;
+
+	public List<Genero> getGenero() {
+		return genero;
 	}
 
-	public void setLibroTema(List<LibroTema> libroTema) {
-		this.libroTema = libroTema;
+	public void setGenero(List<Genero> genero) {
+		this.genero = genero;
 	}
 
-	public List<LibroReconocimiento> getLibroReconocimiento() {
-		return libroReconocimiento;
+	public List<Tema> getTema() {
+		return tema;
 	}
 
-	public void setLibroReconocimiento(List<LibroReconocimiento> libroReconocimiento) {
-		this.libroReconocimiento = libroReconocimiento;
+	public void setTema(List<Tema> tema) {
+		this.tema = tema;
 	}
+
+	public List<Reconocimiento> getReconocimiento() {
+		return reconocimiento;
+	}
+
+	public void setReconocimiento(List<Reconocimiento> reconocimiento) {
+		this.reconocimiento = reconocimiento;
+	}
+
 
 	/**
 	 * 
