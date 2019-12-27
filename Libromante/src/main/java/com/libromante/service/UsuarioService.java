@@ -16,6 +16,5 @@ public interface UsuarioService extends UserDetailsService {
 	public abstract Usuario findByUsername(String username);
 	
 	
-	
 
 }

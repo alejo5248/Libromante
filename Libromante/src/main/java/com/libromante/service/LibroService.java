@@ -15,7 +15,7 @@ public interface LibroService {
 	public abstract boolean removeLibro(int id);
 	public abstract boolean addLibro(Libro libro);
 	public List<Libro> findAllLibros();
-	public List<Libro> findAllBetseller();
+	public List<Libro> findNew();
 	public List<Libro> findAllPortadas();
 	public abstract Page<Libro> listPorPaginacion(Pageable pageable);
 	public List<Libro> findAll();

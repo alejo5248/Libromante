@@ -29,8 +29,8 @@ public interface LibroRepository
 	public List<Libro> findAllLibros();
 
 
-	@Query(value = "SELECT * FROM Libro where bestseller = TRUE", nativeQuery = true)
-	public List<Libro> findAllBetseller();
+	@Query(value = "SELECT * FROM Libro ORDER BY id_libro DESC LIMIT 14", nativeQuery = true)
+	public List<Libro> findNew();
 
 	@Query(value = "SELECT * FROM Libro ORDER BY RAND() LIMIT 8", nativeQuery = true)
 	public List<Libro> findAllPortadas();

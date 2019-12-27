@@ -21,10 +21,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/admin/**").permitAll()//que direcciones se puede ingrear sin autenticar
-		.antMatchers(HttpMethod.GET,"/libros/**", "/admin/**").permitAll()
-		.antMatchers(HttpMethod.PUT, "/admin/**" ).permitAll()
-		.antMatchers(HttpMethod.DELETE, "/admin/**").permitAll()
+		http.authorizeRequests().antMatchers(HttpMethod.POST,"/usuarios/**", "/admin/**").permitAll()//que direcciones se puede ingrear sin autenticar
+		.antMatchers(HttpMethod.GET,"/libros/**","/usuarios/**", "/admin/**").permitAll()
+		.antMatchers(HttpMethod.PUT,"/usuarios/**", "/admin/**" ).permitAll()
+		.antMatchers(HttpMethod.DELETE,"/usuarios/**", "/admin/**").permitAll()
 		/*.antMatchers(HttpMethod.GET,"/factura/mostrarfacturas/{id}").hasRole("ADMIN")*/
 		.anyRequest().authenticated()
 		.and().cors().configurationSource(corsConfigurationSource());

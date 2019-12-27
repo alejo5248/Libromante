@@ -37,6 +37,11 @@ public class LibroController {
 		return libroServ.findAllLibros();
 	}
 	
+	@GetMapping("/nuevos")
+	public List<Libro> librosNuevos(){
+		return libroServ.findNew();
+	}
+	
 	@GetMapping("/portadas")
 	public List<Libro> portadas(){
 		return libroServ.findAllPortadas();

@@ -65,14 +65,8 @@ public class LibroServiceImpl implements LibroService {
 		return libroRep.findAllLibros();
 	}
 
-
-
-	@Override
-	@Transactional(readOnly = true)
-	public List<Libro> findAllBetseller() {
-
-		return libroRep.findAllBetseller();
-	}
+	
+	
 
 	@Override
 	@Transactional(readOnly = true)
@@ -97,6 +91,13 @@ public class LibroServiceImpl implements LibroService {
 	public List<Libro> findAllById(int id) {
 		
 		return libroRep.findAllId(id);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Libro> findNew() {
+		
+		return libroRep.findNew();
 	}
 
 }

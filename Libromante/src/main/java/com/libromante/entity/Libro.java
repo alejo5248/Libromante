@@ -1,11 +1,8 @@
 package com.libromante.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,9 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -99,17 +94,24 @@ public class Libro implements Serializable {
 	@JoinColumn(name = "coleccion_id")
 	private Coleccion coleccion;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JsonIgnoreProperties({  "hibernateLazyInitializer", "handler" })
-	private List<Genero> genero;
+	@NotNull(message = "el genero no puede ser nulo")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "genero_id")
+	@JsonIgnoreProperties({ "libros", "hibernateLazyInitializer", "handler" })
+	private Genero genero;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JsonIgnoreProperties({  "hibernateLazyInitializer", "handler" })
-	private List<Tema> tema;
+	@NotNull(message = "el tema no puede ser nulo")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "tema_id")
+	@JsonIgnoreProperties({ "libros", "hibernateLazyInitializer", "handler" })
+	private Tema tema;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JsonIgnoreProperties({  "hibernateLazyInitializer", "handler" })
-	private List<Reconocimiento> reconocimiento;
+	@NotNull(message = "el reconocimiento no puede ser nulo")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "reconocimiento_id")
+	@JsonIgnoreProperties({ "libros", "hibernateLazyInitializer", "handler" })
+	private Reconocimiento reconocimiento;
+	
 
 	
 	public Libro() {
@@ -253,29 +255,32 @@ public class Libro implements Serializable {
 	}
 
 
-	public List<Genero> getGenero() {
+	public Genero getGenero() {
 		return genero;
 	}
 
-	public void setGenero(List<Genero> genero) {
+	public void setGenero(Genero genero) {
 		this.genero = genero;
 	}
 
-	public List<Tema> getTema() {
+	public Tema getTema() {
 		return tema;
 	}
 
-	public void setTema(List<Tema> tema) {
+	public void setTema(Tema tema) {
 		this.tema = tema;
 	}
 
-	public List<Reconocimiento> getReconocimiento() {
+	public Reconocimiento getReconocimiento() {
 		return reconocimiento;
 	}
 
-	public void setReconocimiento(List<Reconocimiento> reconocimiento) {
+	public void setReconocimiento(Reconocimiento reconocimiento) {
 		this.reconocimiento = reconocimiento;
 	}
+
+
+
 
 
 	/**
