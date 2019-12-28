@@ -2,6 +2,7 @@ package com.libromante.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,6 +17,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -113,6 +117,15 @@ public class AdminController {
 	
 	@DeleteMapping("/evento/{id}")
 	public boolean borrarEvento(@PathVariable("id") int id) {
+		Evento evento = eventoServ.findEventoById(id);
+		String nombreFotoAnterior = evento.getPortada();
+		if(nombreFotoAnterior != null && nombreFotoAnterior.length() > 0) {
+			Path rutaFotoAnterior = Paths.get(nombreFotoAnterior).toAbsolutePath();
+			File archivoFotoAnterior = rutaFotoAnterior.toFile();
+			if(archivoFotoAnterior.exists() && archivoFotoAnterior.canRead()) {
+				archivoFotoAnterior.delete();
+			}
+		}
 		return eventoServ.removeEvento(id);
 	}
 	
@@ -209,6 +222,28 @@ public class AdminController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 		
 	}
+	
+	@GetMapping("/verfotolibro/{nombreFoto:.+")
+	public ResponseEntity<Resource> verFoto(@PathVariable String nombreFoto){
+		Path rutaArchivo = Paths.get("uploads").resolve(nombreFoto).toAbsolutePath();
+		Resource recurso= null;
+		try {
+			recurso = new UrlResource(rutaArchivo.toUri());
+		} catch (MalformedURLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		if(!recurso.exists() && !recurso.isReadable()) {
+			throw new RuntimeException("Error no se pudo cargar la imagen" + nombreFoto);
+			
+		}
+		
+		HttpHeaders cabecera = new HttpHeaders();
+		cabecera.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + recurso.getFilename() + "\"");
+		return new ResponseEntity<Resource>(recurso, cabecera,  HttpStatus.OK);
+	}
+	
 	
 	@DeleteMapping("/libro/{id}")
 	public boolean eliminarLibro(int id) {
@@ -377,7 +412,7 @@ public class AdminController {
 		return update;
 	}
 	
-	@GetMapping("/reconocimiento")
+	@GetMapping("/reconocimientos")
 	public List<Reconocimiento> listarReconocimiento(){
 		return reconocimientoServ.findAllReconocimientos();
 	}

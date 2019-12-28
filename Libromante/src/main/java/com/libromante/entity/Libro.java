@@ -29,31 +29,28 @@ public class Libro implements Serializable {
 	private int id;
 
 	@Column(name = "nombre")
-	@NotEmpty(message = "El nombre no puede estar vacio")
+	
 	private String nombre;
 
 	@Column(name = "precio")
-	@NotEmpty(message = "por favor ingrese el precio")
+	
 	private Double precio;
 
 	@Column(name = "paginas")
-	@NotEmpty(message = "ingrese el numero de paginas")
+	
 	private int paginas;
 
 	@Column(name = "edicion")
-	@NotEmpty(message = "agregue la edicion")
+	
 	private String edicion;
 
 	@Column(name = "formato")
-	@NotEmpty(message = "agregue el formato")
 	private String formato;
 
 	@Column(name = "sipnosis", length = 1500)
-	@NotEmpty(message = "escriba la sipnosis")
 	private String sipnosis;
 
 	@Column(name = "idioma")
-	@NotEmpty(message = "ingrese el idioma")
 	private String idioma;
 
 	@Column(name = "fecha_publicacion")
@@ -64,7 +61,6 @@ public class Libro implements Serializable {
 	private String foto;
 
 	@Column(name = "isbn")
-	@NotEmpty(message = "no puede estar vacio")
 	private String isbn;
 	
 	@Column(name="promoción")
