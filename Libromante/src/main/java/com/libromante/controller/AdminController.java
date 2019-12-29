@@ -145,6 +145,8 @@ public class AdminController {
 		return update;	
 	}
 	
+
+	
 	@PutMapping("/evento/uploadportada")
 	public ResponseEntity<?> uploadPortada(@RequestParam("archivo") MultipartFile archivo,  @RequestParam("id") int id){
 		Map<String, Object> response = new HashMap<String, Object>();

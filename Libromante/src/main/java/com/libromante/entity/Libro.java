@@ -139,7 +139,7 @@ public class Libro implements Serializable {
 
 
 	public Double getPrecio() {
-		return precio * (getDescuento()/100);
+		return precio ;
 	}
 
 	public void setPrecio(Double precio) {
@@ -163,7 +163,7 @@ public class Libro implements Serializable {
 	}
 
 	public Double getPrecioPromocion() {
-		return precio;
+		return precio - (precio * ((double) descuento/100))   ;
 	}
 
 
