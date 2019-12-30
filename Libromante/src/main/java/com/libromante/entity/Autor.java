@@ -36,7 +36,7 @@ public class Autor implements Serializable{
 	private String nombre;
 	
 	@NotEmpty(message = "ingrese la biografia")
-	@Column(name="biografia")
+	@Column(name="biografia", length = 8000)
 	private String biografia;
 	
 	@NotNull(message = "el pais no puede ser vacio")

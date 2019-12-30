@@ -47,7 +47,7 @@ public class Libro implements Serializable {
 	@Column(name = "formato")
 	private String formato;
 
-	@Column(name = "sipnosis", length = 1500)
+	@Column(name = "sipnosis", length = 8000)
 	private String sipnosis;
 
 	@Column(name = "idioma")
@@ -163,7 +163,14 @@ public class Libro implements Serializable {
 	}
 
 	public Double getPrecioPromocion() {
-		return precio - (precio * ((double) descuento/100))   ;
+		Double pPromocion;
+		if(promocion == true) {
+			 pPromocion = precio - (precio * ((double) descuento/100));
+		}else {
+			pPromocion = 0.0;
+		}
+		return pPromocion;
+		
 	}
 
 

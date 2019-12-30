@@ -20,4 +20,5 @@ public interface LibroService {
 	public abstract Page<Libro> listPorPaginacion(Pageable pageable);
 	public List<Libro> findAll();
 	public List<Libro> findAllById(int id);
+	public List<Libro> findAllPromocion();
 }

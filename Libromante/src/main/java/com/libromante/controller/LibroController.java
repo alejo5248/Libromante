@@ -47,6 +47,10 @@ public class LibroController {
 		return libroServ.findAllPortadas();
 	}
 	
+	@GetMapping("/promocion")
+	public List<Libro> promociones(){
+		return libroServ.findAllPromocion();
+	}
 
 	
 	@GetMapping("/page/{page}")

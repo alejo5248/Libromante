@@ -100,4 +100,11 @@ public class LibroServiceImpl implements LibroService {
 		return libroRep.findNew();
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public List<Libro> findAllPromocion() {
+		
+		return libroRep.findAllPromocion();
+	}
+
 }

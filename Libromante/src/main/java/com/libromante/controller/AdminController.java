@@ -225,7 +225,7 @@ public class AdminController {
 		
 	}
 	
-	@GetMapping("/verfotolibro/{nombreFoto:.+")
+	@GetMapping("/uploads/{nombreFoto:.+}")
 	public ResponseEntity<Resource> verFoto(@PathVariable String nombreFoto){
 		Path rutaArchivo = Paths.get("uploads").resolve(nombreFoto).toAbsolutePath();
 		Resource recurso= null;

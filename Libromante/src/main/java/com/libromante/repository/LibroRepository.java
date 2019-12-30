@@ -27,12 +27,15 @@ public interface LibroRepository
 
 	@Query(value = "SELECT * FROM Libro ORDER BY RAND() LIMIT 1", nativeQuery = true)
 	public List<Libro> findAllLibros();
+	
+	@Query(value = "SELECT * FROM Libro WHERE promoción = TRUE ORDER BY RAND() LIMIT 20", nativeQuery = true)
+	public List<Libro> findAllPromocion();
 
 
-	@Query(value = "SELECT * FROM Libro ORDER BY id_libro DESC LIMIT 14", nativeQuery = true)
+	@Query(value = "SELECT * FROM Libro ORDER BY id_libro DESC LIMIT 20", nativeQuery = true)
 	public List<Libro> findNew();
 
-	@Query(value = "SELECT * FROM Libro ORDER BY RAND() LIMIT 8", nativeQuery = true)
+	@Query(value = "SELECT * FROM Libro ORDER BY RAND() LIMIT 20", nativeQuery = true)
 	public List<Libro> findAllPortadas();
 
 	public abstract Page<Libro> findAll(Pageable pageable);
