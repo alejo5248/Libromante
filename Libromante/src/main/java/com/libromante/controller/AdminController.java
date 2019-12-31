@@ -178,6 +178,27 @@ public class AdminController {
 		
 	}
 	
+	@GetMapping("/portadas/{nombreFoto:.+}")
+	public ResponseEntity<Resource> verPortadaEvento(@PathVariable String nombreFoto){
+		Path rutaArchivo = Paths.get("uploads/portadasEventos").resolve(nombreFoto).toAbsolutePath();
+		Resource recurso= null;
+		try {
+			recurso = new UrlResource(rutaArchivo.toUri());
+		} catch (MalformedURLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		if(!recurso.exists() && !recurso.isReadable()) {
+			throw new RuntimeException("Error no se pudo cargar la imagen" + nombreFoto);
+			
+		}
+		
+		HttpHeaders cabecera = new HttpHeaders();
+		cabecera.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + recurso.getFilename() + "\"");
+		return new ResponseEntity<Resource>(recurso, cabecera,  HttpStatus.OK);
+	}
+	
 	//----------------------------aqui terminan las funciones de eventos----------------------------
 	//--------------------aqui empiezan las funciones de usuarios---------------------------------
 	@GetMapping("/mostrarusuarios")
