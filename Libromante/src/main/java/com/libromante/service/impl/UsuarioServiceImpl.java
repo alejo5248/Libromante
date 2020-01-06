@@ -30,6 +30,8 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 	@Qualifier("usuariorepository")
 	private UsuarioRepository usuarioRep;
 	
+
+	
 	@Override
 	@Transactional(readOnly = true)
 	public List<Usuario> listAllUsuarios() {
@@ -46,6 +48,7 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 		}catch(Exception e) {
 			return false;
 		}
+	
 	}
 
 	@Override

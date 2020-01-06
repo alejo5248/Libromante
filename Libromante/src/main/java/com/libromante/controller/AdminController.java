@@ -39,6 +39,7 @@ import com.libromante.entity.Autor;
 import com.libromante.entity.Coleccion;
 import com.libromante.entity.Editorial;
 import com.libromante.entity.Evento;
+import com.libromante.entity.FotosEvento;
 import com.libromante.entity.Genero;
 import com.libromante.entity.Libro;
 import com.libromante.entity.Pais;
@@ -49,6 +50,7 @@ import com.libromante.service.AutorService;
 import com.libromante.service.ColeccionService;
 import com.libromante.service.EditorialService;
 import com.libromante.service.EventoService;
+import com.libromante.service.FotosEventoService;
 import com.libromante.service.GeneroService;
 import com.libromante.service.LibroService;
 import com.libromante.service.PaisService;
@@ -64,6 +66,10 @@ public class AdminController {
 	@Autowired
 	@Qualifier("eventoserviceImpl")
 	private EventoService eventoServ;
+	
+	@Autowired
+	@Qualifier("fotoseventoserviceimpl")
+	private FotosEventoService fotosEventoServ;
 	
 	@Autowired
 	@Qualifier("usuarioserviceImpl")
@@ -146,6 +152,23 @@ public class AdminController {
 	}
 	
 
+	@PutMapping("evento/fotos")
+	public FotosEvento agregarFotos(@RequestParam("fotosEvento") FotosEvento fotosEvento, @RequestParam("archivo") MultipartFile archivo) {
+		Map<String, Object> response = new HashMap<>();
+		String nombreArchivo = null;
+		fotosEvento.setEvento(fotosEvento.getEvento());
+		try {
+			nombreArchivo= fotosEventoServ.copiar(archivo);
+			
+		}catch(IOException e) {
+			response.put("mensaje", "Error al subir la imagen del evento");
+			response.put("error", e.getMessage().concat(": ").concat(e.getCause().getMessage()));
+		}
+		fotosEvento.setFoto(nombreArchivo);
+		this.fotosEventoServ.addFotosEvento(fotosEvento);
+		return fotosEvento;
+	}
+	
 	
 	@PutMapping("/evento/uploadportada")
 	public ResponseEntity<?> uploadPortada(@RequestParam("archivo") MultipartFile archivo,  @RequestParam("id") int id){
@@ -198,6 +221,7 @@ public class AdminController {
 		cabecera.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + recurso.getFilename() + "\"");
 		return new ResponseEntity<Resource>(recurso, cabecera,  HttpStatus.OK);
 	}
+	
 	
 	//----------------------------aqui terminan las funciones de eventos----------------------------
 	//--------------------aqui empiezan las funciones de usuarios---------------------------------
@@ -298,6 +322,12 @@ public class AdminController {
 			update.setPaginas(libro.getPaginas());
 			update.setPrecio(libro.getPrecio());
 			update.setSipnosis(libro.getSipnosis());
+			update.setDescuento(libro.getDescuento());
+			update.setGenero(libro.getGenero());
+			update.setIsbn(libro.getIsbn());
+			update.setPromocion(libro.isPromocion());
+			update.setReconocimiento(libro.getReconocimiento());
+			update.setTema(libro.getTema());
 			this.libroServ.addLibro(update);
 		}
 		return update;

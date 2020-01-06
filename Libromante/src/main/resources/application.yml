@@ -17,4 +17,21 @@ spring:
     properties:
       hibernate:  
         dialect: org.hibernate.dialect.MySQL5Dialect
-
+  mail:    host: smtp.gmail.com
+    port: 587
+    username: libromantelibreriaco@gmail.com
+    password: bwmpuuwzuiiwzyvk
+    properties:      mail: 
+        smtp:
+          starttls:
+            enable: true
+          auth: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+            
+          
+         
