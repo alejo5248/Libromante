@@ -293,7 +293,7 @@ public class AdminController {
 	
 	
 	@DeleteMapping("/libro/{id}")
-	public boolean eliminarLibro(int id) {
+	public boolean eliminarLibro(@PathVariable("id") int id) {
 		Libro libro = libroServ.findById(id);
 		String nombreFotoAnterior = libro.getFoto();
 		if(nombreFotoAnterior != null && nombreFotoAnterior.length() > 0) {
@@ -328,6 +328,7 @@ public class AdminController {
 			update.setPromocion(libro.isPromocion());
 			update.setReconocimiento(libro.getReconocimiento());
 			update.setTema(libro.getTema());
+			update.setCantidad(libro.getCantidad());
 			this.libroServ.addLibro(update);
 		}
 		return update;
@@ -406,7 +407,7 @@ public class AdminController {
 	
 	@PutMapping("genero/modificar/{id}")
 	public Genero updateGenero(@PathVariable("id") int id, @RequestBody @Valid Genero genero) {
-		Genero update = generoServ.findByIdGenero(id);
+		Genero update = generoServ.findById(id);
 		if(id != 0) {
 			update.setNombre(genero.getNombre());
 			this.generoServ.addGenero(update);

@@ -57,4 +57,10 @@ public class AutorServiceImpl implements AutorService{
 		
 		return autorRep.findAll();
 	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Autor> findByNombreAutor(String nombre) {
+		return autorRep.findByNombreAutor(nombre);
+	}
 }

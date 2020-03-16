@@ -60,4 +60,12 @@ public class EditorialServiceImpl implements EditorialService{
 		return editorialRep.findAll();
 	}
 
+
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Editorial> findByNombreEditorial(String nombre) {
+		return editorialRep.findByNombreEditorial(nombre);
+	}
+
 }

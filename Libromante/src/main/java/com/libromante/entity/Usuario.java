@@ -49,6 +49,11 @@ public class Usuario implements Serializable{
 	@NotEmpty(message = "agregue una direccion")
 	@Size(min = 10, max=100)
 	private String direccion;
+	
+	@Column(name= "telefono")
+	@NotEmpty(message = "agregue una numero de telefono")
+	@Size(min=7, max=11)
+	private String telefono;
 
 	@Column(name="username", unique = true)
 	@NotEmpty(message = "el nombre de usuario no puede estar vacio")
@@ -70,6 +75,13 @@ public class Usuario implements Serializable{
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
 	private List<InscripcionEvento> inscripcion;
 	
+	@JsonIgnoreProperties(value= {"usuario","hibernateLazyInitializer", "handler"})
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL)
+	private List<Comentarios> comentarios;
+	
+	@JsonIgnoreProperties(value= {"usuario","hibernateLazyInitializer", "handler"})
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL)
+	private List<Post> posts;
 	
 	public Usuario() {
 		this.inscripcion = new ArrayList<InscripcionEvento>();
@@ -127,6 +139,16 @@ public class Usuario implements Serializable{
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
+	
+	
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
 
 	public String getUsername() {
 		return username;
@@ -169,6 +191,24 @@ public class Usuario implements Serializable{
 
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
+	}
+
+
+	public List<Comentarios> getComentarios() {
+		return comentarios;
+	}
+
+	public void setComentarios(List<Comentarios> comentarios) {
+		this.comentarios = comentarios;
+	}
+
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
 	}
 
 

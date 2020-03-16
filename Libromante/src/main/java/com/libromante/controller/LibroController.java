@@ -14,8 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.libromante.entity.Autor;
+import com.libromante.entity.Editorial;
+import com.libromante.entity.Genero;
 import com.libromante.entity.Libro;
+import com.libromante.entity.Tema;
+import com.libromante.service.AutorService;
+import com.libromante.service.EditorialService;
+import com.libromante.service.GeneroService;
 import com.libromante.service.LibroService;
+import com.libromante.service.TemaService;
 
 @RestController
 @RequestMapping("/libros")
@@ -25,10 +33,31 @@ public class LibroController {
 	@Qualifier("libroserviceimpl")
 	private LibroService libroServ;
 	
+	@Autowired
+	@Qualifier("generoserviceimpl")
+	private GeneroService generoServ;
+	
+	@Autowired
+	@Qualifier("temaserviceimpl")
+	private TemaService temaServ;
+	
 	@GetMapping("/listarpornombre/{nombre}")
 	@ResponseStatus(code = HttpStatus.OK)
 	public List<Libro> filtrarLibros(@PathVariable String nombre){
 		return libroServ.findByNombre(nombre);
+	}
+
+	
+	@GetMapping("/listarportema/{id}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public List<Tema> filtrarTema(@PathVariable int id){
+		return temaServ.findById(id);
+	}
+	
+	@GetMapping("/listarporgenero/{id}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public List<Genero> filtrarGenero(@PathVariable int id){
+		return generoServ.findByIdGenero(id);
 	}
 	
 

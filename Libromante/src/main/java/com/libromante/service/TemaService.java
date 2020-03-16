@@ -10,5 +10,6 @@ public interface TemaService {
 	public abstract Tema findByIdTema(int id);
 	public abstract boolean removeTema(int id);
 	public List<Tema> findAllTemas();
+	public List<Tema> findById(int id);
 
 }

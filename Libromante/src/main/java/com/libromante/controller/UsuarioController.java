@@ -71,6 +71,7 @@ public class UsuarioController {
 			update.setApellido(usuario.getApellido());
 			update.setDireccion(usuario.getDireccion());
 			update.setPassword(usuario.getPassword());
+			update.setTelefono(usuario.getTelefono());
 			this.usuarioServ.updateUsuario(update);
 		}
 		return update;

@@ -19,8 +19,9 @@ public interface LibroRepository
 
 	public abstract Libro findById(int id);
 
-	@Query("select p from Libro p where p.nombre like %?1%")
+	@Query("select p from Libro p where p.nombre || p.autor.nombre || p.editorial.nombre like %?1%")
 	public List<Libro> findByNombre(String nombre);
+
 
 	// la misma manera de hacer consultas
 	public List<Libro> findByNombreContainingIgnoreCase(String nombre);

@@ -10,5 +10,6 @@ public interface EditorialService{
 	public abstract Editorial findByIdEditorial(int id);
 	public abstract boolean removeEditorial(int id);
 	public List<Editorial> findAllEditoriales();
+	public List<Editorial> findByNombreEditorial(String nombre);
 
 }

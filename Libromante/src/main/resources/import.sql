@@ -1,0 +1,1 @@
+INSERT INTO pais (id_pais, nombre, siglas) VALUES (4, 'Argentina', 'ARG');

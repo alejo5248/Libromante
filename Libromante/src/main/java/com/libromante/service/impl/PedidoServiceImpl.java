@@ -1,5 +1,7 @@
 package com.libromante.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -44,6 +46,13 @@ public class PedidoServiceImpl implements PedidoService{
 			return false;
 		}
 		
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Pedido> findAllPedidos() {
+		
+		return pedidoRep.findAll();
 	}
 	
 	

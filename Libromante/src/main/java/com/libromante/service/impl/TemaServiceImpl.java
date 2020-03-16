@@ -60,4 +60,11 @@ public class TemaServiceImpl implements TemaService{
 		return temaRep.findAll();
 	}
 
+
+
+	@Override
+	public List<Tema> findById(int id) {
+		return temaRep.findByIdTema(id);
+	}
+
 }

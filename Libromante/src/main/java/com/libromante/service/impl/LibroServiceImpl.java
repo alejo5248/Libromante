@@ -107,4 +107,5 @@ public class LibroServiceImpl implements LibroService {
 		return libroRep.findAllPromocion();
 	}
 
+
 }

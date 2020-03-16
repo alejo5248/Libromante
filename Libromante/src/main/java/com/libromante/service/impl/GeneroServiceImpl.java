@@ -17,16 +17,6 @@ public class GeneroServiceImpl implements GeneroService{
 	@Qualifier("generorepository")
 	GeneroRepository generoRep;
 
-	
-
-	@Override
-	@Transactional(readOnly = true)
-	public Genero findByIdGenero(int id) {
-		
-		return generoRep.findById(id);
-	}
-
-
 	@Override
 	@Transactional
 	public boolean addGenero(Genero genero) {
@@ -44,7 +34,7 @@ public class GeneroServiceImpl implements GeneroService{
 	@Transactional
 	public boolean removeGenero(int id) {
 		try {
-			Genero genero = findByIdGenero(id);
+			Genero genero = findById(id);
 			if(genero != null) {
 				generoRep.delete(genero);
 			}
@@ -60,6 +50,27 @@ public class GeneroServiceImpl implements GeneroService{
 		
 		return generoRep.findAll();
 	}
+
+
+
+	@Override
+	@Transactional(readOnly = true)
+	public Genero findById(int id) {
+		return generoRep.findById(id);
+	}
+
+
+
+	@Override
+	public List<Genero> findByIdGenero(int id) {
+		return generoRep.findAllId(id);
+	}
+
+
+
+	
+
+	
 	
 	
 

@@ -1,5 +1,7 @@
 package com.libromante.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -41,6 +43,11 @@ public class PedidoController {
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public Pedido crear(@RequestBody Pedido pedido) {
 		return pedidoServ.savePedido(pedido);
+	}
+	
+	@GetMapping("/verpedidos")
+	public List<Pedido> verPedidos(){
+		return pedidoServ.findAllPedidos();
 	}
 	
 
