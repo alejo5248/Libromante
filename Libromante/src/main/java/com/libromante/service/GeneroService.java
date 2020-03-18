@@ -3,6 +3,7 @@ package com.libromante.service;
 import java.util.List;
 
 import com.libromante.entity.Genero;
+import com.libromante.entity.Libro;
 
 public interface GeneroService {
 	

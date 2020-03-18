@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.libromante.entity.Genero;
+import com.libromante.entity.Libro;
 import com.libromante.repository.GeneroRepository;
 import com.libromante.service.GeneroService;
 
